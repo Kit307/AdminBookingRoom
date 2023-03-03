@@ -10,6 +10,7 @@
     <div class="mb-4 px-4">
       <p class="pl-4 text-sm font-semibold mb-1">MAIN</p>
       <div
+        @click="$router.replace('/admin')"
         class="w-full flex items-center text-blue-400 h-10 pl-4 bg-gray-200 hover:bg-gray-200 rounded-lg cursor-pointer"
       >
         <svg class="h-6 w-6 fill-current mr-2" viewBox="0 0 20 20">
@@ -19,7 +20,7 @@
         </svg>
         <span class="text-gray-700">Dashboard</span>
       </div>
-      <div
+      <!-- <div
         class="w-full flex items-center text-blue-400 h-10 pl-4 hover:bg-gray-200 rounded-lg cursor-pointer"
       >
         <svg class="h-6 w-6 fill-current mr-2" viewBox="0 0 20 20">
@@ -58,12 +59,13 @@
           ></path>
         </svg>
         <span class="text-gray-700">Calender</span>
-      </div>
+      </div> -->
     </div>
 
     <div class="mb-4 px-4">
       <p class="pl-4 text-sm font-semibold mb-1">PRODUCTS</p>
       <div
+        @click="$router.replace('/admin/addRoom')"
         class="w-full flex items-center text-blue-400 h-10 pl-4 hover:bg-gray-200 rounded-lg cursor-pointer"
       >
         <svg class="h-6 w-6 fill-current mr-2" viewBox="0 0 20 20">
@@ -73,7 +75,7 @@
         </svg>
         <span class="text-gray-700">Add Product</span>
       </div>
-      <div
+      <!-- <div
         class="w-full flex items-center text-blue-400 h-10 pl-4 hover:bg-gray-200 rounded-lg cursor-pointer"
       >
         <svg class="h-6 w-6 fill-current mr-2" viewBox="0 0 20 20">
@@ -82,7 +84,7 @@
           ></path>
         </svg>
         <span class="text-gray-700">View Products</span>
-      </div>
+      </div> -->
     </div>
 
     <div class="mb-4 px-4">
@@ -121,6 +123,50 @@
   </div>
 </template>
 <script>
-export default {};
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { doc, onSnapshot } from "firebase/firestore";
+import { db, auth } from "../plugin/index";
+export default {
+  mounted() {
+    this.chackLogin();
+  },
+  data() {
+    return {
+      login: true,
+      uid: "",
+      profiledata: false,
+    };
+  },
+  methods: {
+    chackLogin() {
+      // const auth = getAuth();
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          // User is signed in, see docs for a list of available properties
+          // https://firebase.google.com/docs/reference/js/firebase.User
+          const uid = user.uid;
+          // console.log(uid);
+          this.uid = uid;
+          this.login = false;
+
+          this.readData();
+        } else {
+          this.$router.replace("/login");
+        }
+      });
+    },
+    readData() {
+      const user = auth.currentUser;
+      onSnapshot(doc(db, "Profile", user.uid), (doc) => {
+        // console.log(doc.data());
+        this.profiledata = doc.data().Admin;
+        if (!this.profiledata) {
+          this.$router.replace("/")
+          
+        }
+      });
+    },
+  },
+};
 </script>
 <style></style>

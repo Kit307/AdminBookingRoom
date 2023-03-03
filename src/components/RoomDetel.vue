@@ -12,7 +12,7 @@ export default {
   },
   methods: {
     BackToDetle() {
-      this.$router.replace("/");
+      this.$router.replace("/admin");
     },
   },
 };
