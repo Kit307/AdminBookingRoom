@@ -1,72 +1,80 @@
 <template>
-  <div
-    id="popup-modal"
-    tabindex="-1"
-    class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full"
-  >
-    <div class="relative w-full h-full max-w-md md:h-auto">
-      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-        <button
-          type="button"
-          class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
-          data-modal-hide="popup-modal"
+  <div>
+    <div class="relative flex justify-center items-center">
+      <div
+        id="menu"
+        class="w-full h-full bg-gray-900 bg-opacity-80 top-0 fixed sticky-0"
+      >
+        <div
+          class="2xl:container 2xl:mx-auto py-48 px-4 md:px-28 flex justify-center items-center"
         >
-          <svg
-            aria-hidden="true"
-            class="w-5 h-5"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
+          <div
+            class="w-96 md:w-auto dark:bg-gray-800 relative flex flex-col justify-center items-center bg-white py-16 px-4 md:px-24 xl:py-24 xl:px-36"
           >
-            <path
-              fill-rule="evenodd"
-              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-              clip-rule="evenodd"
-            ></path>
-          </svg>
-          <span class="sr-only">Close modal</span>
-        </button>
-        <div class="p-6 text-center">
-          <svg
-            aria-hidden="true"
-            class="mx-auto mb-4 text-gray-400 w-14 h-14 dark:text-gray-200"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            ></path>
-          </svg>
-          <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-            Are you sure you want to delete this product?
-          </h3>
-          <button
-            data-modal-hide="popup-modal"
-            type="button"
-            class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
-          >
-            Yes, I'm sure
-          </button>
-          <button
-            data-modal-hide="popup-modal"
-            type="button"
-            class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
-          >
-            No, cancel
-          </button>
+            <div role="banner"></div>
+            <div class="mt-12">
+              <h1
+                role="main"
+                class="text-3xl dark:text-white lg:text-4xl font-semibold leading-7 lg:leading-9 text-center text-gray-800"
+              >
+                Your Conflae for logout
+              </h1>
+            </div>
+            <div class="mt">
+              <p
+                class="mt-6 sm:w-80 text-base dark:text-white leading-7 text-center text-gray-800"
+              >
+                Please, accept these sweeties to continue enjoying our site!
+              </p>
+            </div>
+            <button
+              @click="logout(), $emit('add', Math.random())"
+              class="w-full dark:text-gray-800 dark:hover:bg-gray-100 dark:bg-white sm:w-auto mt-14 text-base leading-4 text-center text-white py-6 px-16 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 bg-gray-800 hover:bg-black"
+            >
+              Logout
+            </button>
+            <a
+              href="javascript:void(0)"
+              class="mt-6 dark:text-white dark:hover:border-white text-base leading-none focus:outline-none hover:border-gray-800 focus:border-gray-800 border-b border-transparent text-center text-gray-800"
+              >Nope.. I am on a diet</a
+            >
+            <button
+              @click="$emit('add', Math.random())"
+              class="text-gray-800 dark:text-gray-400 absolute top-8 right-8 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800"
+              aria-label="close"
+            >
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M18 6L6 18"
+                  stroke="currentColor"
+                  stroke-width="1.66667"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M6 6L18 18"
+                  stroke="currentColor"
+                  stroke-width="1.66667"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
-
 <script>
 import { signOut } from "firebase/auth";
+
 import { auth } from "../plugin/index";
 export default {
   methods: {
@@ -77,7 +85,8 @@ export default {
           // Sign-outsuccessful.
           //   this.$router.push("/");
           this.$router.replace("/login");
-          // console.log("");
+          // console.log("dsaasd");
+          this.logoutvar = false;
         })
         .catch((error) => {
           // An error happened.
@@ -87,5 +96,4 @@ export default {
   },
 };
 </script>
-
 <style></style>

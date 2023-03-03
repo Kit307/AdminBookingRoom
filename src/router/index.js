@@ -48,10 +48,20 @@ const router = createRouter({
       path: "/Bookingpage",
       name: "Bookingpage",
       component: () => import("../components/Bookingpage.vue"),
+      children: [
+        {
+          path: "/Bookingpage/:id",
+          component: () => import("../components/BookintDetile.vue"),
+        },
+      ],
     },
     {
       path: "/:pathMatch(.*)*",
       component: () => import("../components/Page404.vue"),
+    },
+    {
+      path: "/BooKintDetal",
+      component: () => import("../components/BookintDetile.vue"),
     },
   ],
 });

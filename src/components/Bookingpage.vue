@@ -1,12 +1,12 @@
 <template>
   <LoadingScreen v-show="Loading" />
-  <div>
+  <div class="bg-slate-50 h-screen" v-if="product">
     <button @click="ReadDetil()">asdsad</button>
     <!-- {{ time }}{{ aaa[0].Time.Time1.Booking == null }} -->
     <div class="grid grid-cols-4 gap-2">
       <div
         v-for="item in aaa"
-        class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+        class="max-w-sm bg-white border shadow-2xl border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700"
       >
         <a href="#">
           {{ item.Time.Time1.Time }}
@@ -33,13 +33,16 @@
           </p>
           <div class="flex">
             <div>
-              <a
+              <router-link
+                :to="'/Bookingpage/' + item.Details.IdRoom"
+                sss="asdasd"
+                @click="product = !product"
                 v-if="item.Time.Time1.Booking == null"
                 href="#"
                 class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               >
                 {{ item.Time.Time1.Time }}
-              </a>
+              </router-link>
               <p
                 v-else
                 href="#"
@@ -47,24 +50,34 @@
               >
                 {{ item.Time.Time1.Time }}
               </p>
-              <a
+              <router-link
+                @click="product = !product"
+                :to="'/Bookingpage/' + item.Details.IdRoom"
                 href="#"
                 class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               >
                 {{ item.Time.Time2.Time }}
-              </a>
-              <a
+              </router-link>
+              <router-link
+                @click="product = !product"
+                :to="'/Bookingpage/' + item.Details.IdRoom"
                 href="#"
                 class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               >
                 {{ item.Time.Time3.Time }}
-              </a>
+              </router-link>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <router-view
+    v-else
+    :sss="aaa"
+    @clase="product = !product"
+    :key="$route.path"
+  />
 </template>
 <script>
 import { collection, getDocs } from "firebase/firestore";
@@ -81,6 +94,7 @@ export default {
       time: "",
       Loading: true,
       timeDate: [],
+      product: true,
     };
   },
   mounted() {
@@ -118,7 +132,7 @@ export default {
         }
         // console.log(this.aaa);
       }
-      this.Loading = false;
+      // this.Loading = false;
     },
     async ReadDetil() {
       this.Loading = true;

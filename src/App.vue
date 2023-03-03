@@ -4,7 +4,7 @@ import Navber from "./components/Navbar.vue";
 </script>
 
 <template>
-  <Navber />
+  <Navber class="sticky top-0" />
   <div class="z-10">
     <router-view />
   </div>
