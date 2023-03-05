@@ -58,31 +58,40 @@
             >Admin</a
           >
 
-          <a
-            href="#"
-            class="text-sm font-semibold leading-6 text-gray-900"
-            @click="$router.replace('/BooKintDetal')"
-            >Company</a
+          <a href="#" class="text-sm font-semibold leading-6 text-gray-900"
+            >History</a
           >
         </div>
         <div
-          v-if="login"
-          class="hidden lg:flex lg:flex-1 lg:justify-end"
-          @click="$router.replace('/login')"
+          class="hidden lg:flex lg:flex-1 lg:justify-end text-sm font-semibold leading-6 text-gray-900"
         >
-          <a href="#" class="text-sm font-semibold leading-6 text-gray-900"
-            >Log in <span aria-hidden="true">&rarr;</span></a
-          >
+          <div class="px-10" @click="$router.replace('/Profile')">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              fill="currentColor"
+              class="bi bi-person-circle"
+              viewBox="0 0 16 16"
+            >
+              <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+              <path
+                fill-rule="evenodd"
+                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
+              />
+            </svg>
+          </div>
+          <div v-if="login" class="" @click="$router.replace('/login')">
+            <a href="#" class="text-sm font-semibold leading-6 text-gray-900"
+              >Log in <span aria-hidden="true">&rarr;</span></a
+            >
+          </div>
+          <button v-else class="" @click="popup = true">
+            <a href="#" class=""
+              >Logout<span aria-hidden="true">&rarr;</span></a
+            >
+          </button>
         </div>
-        <button
-          v-else
-          class="hidden lg:flex lg:flex-1 lg:justify-end"
-          @click="popup = true"
-        >
-          <a href="#" class="text-sm font-semibold leading-6 text-gray-900"
-            >Logout<span aria-hidden="true">&rarr;</span></a
-          >
-        </button>
       </nav>
       <!-- Mobile menu, show/hide based on menu open state. -->
       <div role="dialog" aria-modal="true" v-if="navbar">
@@ -147,7 +156,7 @@
                 <a
                   href="#"
                   class="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-400/10"
-                  >Company</a
+                  >Beg</a
                 >
               </div>
               <div
@@ -196,7 +205,7 @@ export default {
       uid: "",
       profiledata: false,
       popup: false,
-      navbar: true,
+      navbar: false,
     };
   },
   mounted() {

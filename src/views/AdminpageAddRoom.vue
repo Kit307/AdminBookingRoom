@@ -176,6 +176,8 @@ export default {
               Booking: null,
               IdTime: 1,
               Time: "9:00 - 12:00",
+              Day:
+                d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate(),
             },
             Time2: {
               IdRoom: this.aaa.length + 1,
@@ -183,6 +185,8 @@ export default {
               Booking: null,
               IdTime: 2,
               Time: "12:00 - 15:00",
+              Day:
+                d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate(),
             },
             Time3: {
               IdRoom: this.aaa.length + 1,
@@ -190,6 +194,8 @@ export default {
               Booking: null,
               IdTime: 3,
               Time: "15:00 - 18:00",
+              Day:
+                d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate(),
             },
           }
         );

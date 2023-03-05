@@ -1,7 +1,19 @@
 <template>
   <LoadingScreen v-show="Loading" />
+  <form @submit.prevent="test11">
+    <input
+      v-model="date"
+      name="trip-start"
+      required
+      :min="timestart"
+      :max="maxDate"
+      type="date"
+    />
+    <button type="submit">asd</button>
+  </form>
   <div class="bg-slate-50 h-screen" v-if="product">
     <button @click="ReadDetil()">asdsad</button>
+    {{ timestart }}
     <!-- {{ time }}{{ aaa[0].Time.Time1.Booking == null }} -->
     <div class="grid grid-cols-4 gap-2">
       <div
@@ -9,7 +21,6 @@
         class="max-w-sm bg-white border shadow-2xl border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700"
       >
         <a href="#">
-          {{ item.Time.Time1.Time }}
           <img
             class="rounded-t-lg h-64 w-full object-cover"
             :src="item.Details.Img_Url"
@@ -51,21 +62,39 @@
                 {{ item.Time.Time1.Time }}
               </p>
               <router-link
-                @click="product = !product"
                 :to="'/Bookingpage/' + item.Details.IdRoom"
+                sss="asdasd"
+                @click="product = !product"
+                v-if="item.Time.Time2.Booking == null"
                 href="#"
                 class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               >
                 {{ item.Time.Time2.Time }}
               </router-link>
+              <p
+                v-else
+                href="#"
+                class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
+              >
+                {{ item.Time.Time2.Time }}
+              </p>
               <router-link
-                @click="product = !product"
                 :to="'/Bookingpage/' + item.Details.IdRoom"
+                sss="asdasd"
+                @click="product = !product"
+                v-if="item.Time.Time3.Booking == null"
                 href="#"
                 class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               >
                 {{ item.Time.Time3.Time }}
               </router-link>
+              <p
+                v-else
+                href="#"
+                class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
+              >
+                {{ item.Time.Time3.Time }}
+              </p>
             </div>
           </div>
         </div>
@@ -75,7 +104,7 @@
   <router-view
     v-else
     :sss="aaa"
-    @clase="product = !product"
+    @clase="(product = !product), test()"
     :key="$route.path"
   />
 </template>
@@ -92,9 +121,12 @@ export default {
     return {
       aaa: [],
       time: "",
+      timestart: "2023-03-05", // set to the current date
+      maxDate: "2023-03-30",
       Loading: true,
       timeDate: [],
       product: true,
+      date: null,
     };
   },
   mounted() {
@@ -105,11 +137,19 @@ export default {
     getTime() {
       const now = new Date();
       const year = now.getFullYear();
-      const month = now.getMonth();
-      const day = now.getDate() + 1;
+      const month = now.getMonth() + 1;
+      const day = now.getDate();
       this.time = year + "/" + month + "/" + day;
+
+      this.timestart = `${year}-0${month}-${day}`;
+      const maxDate = new Date(year, month - 1, day + 10);
+      const maxYear = maxDate.getFullYear();
+      const maxMonth = maxDate.getMonth() + 1;
+      const maxDay = maxDate.getDate();
+      this.maxDate = `${maxYear}-0${maxMonth}-${maxDay}`;
     },
     async test() {
+      this.aaa = [];
       const querySnapshot = await getDocs(collection(db, "Room"));
       querySnapshot.forEach(async (doc) => {
         // await this.ReadDetil(doc.data().IdRoom),
@@ -147,6 +187,9 @@ export default {
       });
 
       this.Loading = false;
+    },
+    test11() {
+      console.log(this.date);
     },
   },
 };

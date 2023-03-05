@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../components/HomePage.vue";
 import RoomDetel from "../components/RoomDetel.vue";
 import Admin from "../views/AdminPageHome.vue";
+import BookingpageDet from "../components/BookintDetile.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -51,7 +52,7 @@ const router = createRouter({
       children: [
         {
           path: "/Bookingpage/:id",
-          component: () => import("../components/BookintDetile.vue"),
+          component: BookingpageDet,
         },
       ],
     },
@@ -62,6 +63,10 @@ const router = createRouter({
     {
       path: "/BooKintDetal",
       component: () => import("../components/BookintDetile.vue"),
+    },
+    {
+      path: "/Profile",
+      component: () => import("../components/ProFile.vue"),
     },
   ],
 });
