@@ -70,7 +70,7 @@ const router = createRouter({
     },
     {
       path: "/History",
-      component: () => import("../components/CartTable.vue"),
+      component: () => import("../components/History.vue"),
     },
   ],
 });

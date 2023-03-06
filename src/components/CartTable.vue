@@ -1,7 +1,7 @@
 <template>
   <div class="bg-white dark:bg-gray-600">
     <div class="h-screen bg-white dark:bg-gray-600">
-      <div class="py-6"></div>
+      <div class="py-6">{{ bag }}</div>
       <div
         wire:loading
         v-show="!show"
@@ -434,15 +434,15 @@ export default {
     TransitionRoot,
   },
   async mounted() {
-    this.readdataincart();
-    const querySnapshot = await getDocs(collection(db, "product"));
+    const querySnapshot = await getDocs(collection(db, "Room"));
     querySnapshot.forEach((doc) => {
       this.profiledata.push({ id: doc.id, data: doc.data() });
     });
+    await this.readdataincart();
     this.addProducttoTable();
     this.show = true;
     const user = auth.currentUser;
-    onSnapshot(doc(db, "bag", user.uid), (doc) => {
+    await onSnapshot(doc(db, "cart", user.uid), (doc) => {
       this.bag = doc.data();
     });
   },

@@ -3,7 +3,7 @@ import { RouterView } from "vue-router";
 import Navber from "./components/Navbar.vue";
 </script>
 
-<template>
+<template :class="isDark ? 'dark' : ''">
   <Navber class="" />
   <div class="z-10">
     <router-view />
@@ -14,3 +14,12 @@ import Navber from "./components/Navbar.vue";
   font-family: "Noto Sans Thai", sans-serif;
 }
 </style>
+<script>
+export default {
+  data() {
+    return {
+      isDark: false,
+    };
+  },
+};
+</script>
