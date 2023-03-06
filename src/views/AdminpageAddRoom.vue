@@ -154,8 +154,8 @@ export default {
       const now = new Date();
       const year = now.getFullYear();
       const month = now.getMonth();
-      const day = now.getDate() - 10;
-      for (let day1 = day; day1 <= day + 10; day1++) {
+      const day = now.getDate() - 3;
+      for (let day1 = day; day1 <= day + 100; day1++) {
         const d = new Date(year, month, day1);
         await setDoc(
           doc(

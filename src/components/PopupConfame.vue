@@ -27,7 +27,7 @@
               <p
                 class="mt-6 sm:w-80 text-base leading-7 text-center text-gray-800"
               >
-                Please, accept these sweeties to continue enjoying our site!
+                {{ datezaza }}
               </p>
             </div>
             <button
@@ -77,6 +77,8 @@
   </div>
 </template>
 <script>
-export default {};
+export default {
+  props: ["datezaza"],
+};
 </script>
 <style></style>

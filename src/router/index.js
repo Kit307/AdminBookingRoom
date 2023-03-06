@@ -68,6 +68,10 @@ const router = createRouter({
       path: "/Profile",
       component: () => import("../components/ProFile.vue"),
     },
+    {
+      path: "/History",
+      component: () => import("../components/CartTable.vue"),
+    },
   ],
 });
 

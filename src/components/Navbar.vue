@@ -1,5 +1,5 @@
 <template>
-  <div class="sticky-0">
+  <div class="sticky top-0 z-50 bg-slate-50">
     <div class="px-6 pt-6 lg:px-8 z-50">
       <nav class="flex items-center justify-between" aria-label="Global">
         <div class="flex lg:flex-1">
@@ -58,7 +58,10 @@
             >Admin</a
           >
 
-          <a href="#" class="text-sm font-semibold leading-6 text-gray-900"
+          <a
+            href="#"
+            class="text-sm font-semibold leading-6 text-gray-900"
+            @click="$router.replace('/History')"
             >History</a
           >
         </div>

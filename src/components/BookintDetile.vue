@@ -35,6 +35,7 @@
                 <span class="font-semibold">รายละเอียด </span
                 >{{ sss[productid - 1].Details.Details }}
               </div>
+              <div class="font-black text-red-700">{{ date }}</div>
             </div>
             <div class="absolute bottom-0">
               <a
@@ -56,14 +57,14 @@
                 @click="(Popup = true), (click = 2)"
                 v-if="sss[productid - 1].Time.Time2.Booking == null"
                 href="#"
-                class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
+                class="inline-flex items-center px-3 py-2 mx-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
               >
                 {{ sss[productid - 1].Time.Time2.Time }}
               </a>
               <p
                 v-else
                 href="#"
-                class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
+                class="inline-flex items-center px-3 py-2 mx-3 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
               >
                 {{ sss[productid - 1].Time.Time2.Time }}
               </p>
@@ -88,8 +89,13 @@
       </div>
     </div>
   </div>
-  {{ DataRoomDetail }}
-  <PopupConfame v-show="Popup" @add="Popup = false" @confirm="asd()" />
+
+  <PopupConfame
+    v-show="Popup"
+    @add="Popup = false"
+    :datezaza="dateset"
+    @confirm="asd()"
+  />
   <LoadingScreen v-show="loading" />
 </template>
 <script>
@@ -106,7 +112,7 @@ export default {
     LoadingScreen,
     PopupConfame,
   },
-  props: ["sss"],
+  props: ["sss", "date"],
   async mounted() {
     this.loading = true;
     this.readData();
@@ -133,6 +139,7 @@ export default {
       cardnew: false,
       DataRoomDetail: "",
       Time: ["Time1", "Time2", "Time3"],
+      dateset: this.date,
     };
   },
   methods: {
@@ -197,6 +204,7 @@ export default {
       const citiesRef = collection(db, "cart");
       await setDoc(doc(citiesRef, user.uid), {
         UID: user.uid,
+        // Product: [],
         Product: this.datacart.Product,
       });
       let d = new Date(this.sss[this.productid - 1].Time.Time1.Day);
