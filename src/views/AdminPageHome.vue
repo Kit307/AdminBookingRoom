@@ -1,7 +1,9 @@
 <template>
   <Slidebar />
-  {{ aaa }}
+  <!-- {{ readDataCount() }} -->
   <div class="w-full bg-gray-100 pl-0 lg:pl-64 min-h-screen" id="main-content">
+    <!-- <button @click="AddBookingCount()">add + 1</button> -->
+    <div>{{ countBooking }}</div>
     <div class="grid grid-cols-4 gap-2">
       <div
         v-for="(item, index) in aaa"
@@ -56,6 +58,8 @@ import { db } from "../plugin/index";
 // import { collection,  } from "firebase/firestore";
 import LoadingScreen from "../components/LoadingScreen.vue";
 import Slidebar from "../components/Slidebar.vue";
+import { doc, onSnapshot } from "firebase/firestore";
+import { setDoc } from "firebase/firestore";
 
 export default {
   components: {
@@ -66,10 +70,12 @@ export default {
     return {
       aaa: [],
       Loading: true,
+      countBooking: 0,
     };
   },
   mounted() {
     this.test();
+    this.readDataCount();
   },
   methods: {
     async test() {
@@ -77,9 +83,20 @@ export default {
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
         this.aaa.push(doc.data());
-        console.log(doc.data());
+        // console.log(doc.data());
       });
       this.Loading = false;
+    },
+    readDataCount() {
+      const unsub = onSnapshot(doc(db, "Admin", "TotleBooking"), (doc) => {
+        console.log("Current data: ", doc.data());
+        this.countBooking = doc.data().TotleBooking;
+      });
+    },
+    async AddBookingCount() {
+      await setDoc(doc(db, "Admin", "TotleBooking"), {
+        TotleBooking: (this.countBooking += 1),
+      });
     },
   },
 };

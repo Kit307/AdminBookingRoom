@@ -1,10 +1,17 @@
 <template>
-  <div class="sticky top-0 z-50 bg-slate-50">
+  <div
+    class="sticky top-0 z-50 bg-slate-50"
+    v-show="
+      currentRouteName != 'admin' &&
+      currentRouteName != 'admin/RoomDetel' &&
+      currentRouteName != 'addpage'
+    "
+  >
     <div class="px-6 pt-6 lg:px-8 z-50">
       <nav class="flex items-center justify-between" aria-label="Global">
         <div class="flex lg:flex-1">
           <a href="#" class="-m-1.5 p-1.5">
-            <span class="sr-only">Your Company</span>
+            <span class="sr-only"></span>
             <img
               class="h-8"
               src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
@@ -40,8 +47,8 @@
             href="#"
             class="text-sm font-semibold leading-6 text-gray-900"
             @click="$router.replace('/')"
-            >Home</a
-          >
+            >Home
+          </a>
 
           <a
             href="#"
@@ -256,6 +263,11 @@ export default {
         // console.log(doc.data());
         this.profiledata = doc.data();
       });
+    },
+  },
+  computed: {
+    currentRouteName() {
+      return this.$route.name;
     },
   },
 };

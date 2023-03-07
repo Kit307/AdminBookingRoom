@@ -120,9 +120,11 @@ export default {
     const querySnapshot = await getDocs(collection(db, "cart"));
     querySnapshot.forEach((doc) => {
       this.profiledata.push({ id: doc.id, data: doc.data() });
-      // console.log(2);
     });
     this.loading = false;
+    const unsub = onSnapshot(doc(db, "Admin", "TotleBooking"), (doc) => {
+      this.countBooking = doc.data().TotleBooking;
+    });
   },
   data() {
     return {
@@ -140,6 +142,7 @@ export default {
       DataRoomDetail: "",
       Time: ["Time1", "Time2", "Time3"],
       dateset: this.date,
+      countBooking: 0,
     };
   },
   methods: {
@@ -161,6 +164,9 @@ export default {
       if (this.login) {
         this.loading = true;
 
+        await setDoc(doc(db, "Admin", "TotleBooking"), {
+          TotleBooking: (this.countBooking += 1),
+        });
         this.checkproduct();
       } else {
         this.logoutvar = false;
@@ -204,7 +210,6 @@ export default {
       const citiesRef = collection(db, "cart");
       await setDoc(doc(citiesRef, user.uid), {
         UID: user.uid,
-        // Product: [],
         Product: this.datacart.Product,
       });
       let d = new Date(this.sss[this.productid - 1].Time.Time1.Day);

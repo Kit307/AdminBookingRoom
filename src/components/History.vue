@@ -17,10 +17,10 @@
               <th scope="col" class="px-6 py-3">Action</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody v-for="(i, index) in dataUser" :key="index">
             <tr
-              v-for="i in dataUser"
               class="bg-white border-b dark:bg-gray-900 dark:border-gray-700"
+              v-if="index >= (x - 1) * 5 && index < x * 5"
             >
               <td class="px-6 py-4">
                 <img
@@ -33,7 +33,7 @@
                 scope="row"
                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
               >
-                {{ dataRoom[i.idproduct - 1].NameRoom }}
+                {{ dataRoom[i.idproduct - 1].NameRoom }} {{ index }}
               </th>
               <td class="px-6 py-4">
                 {{ dataRoom[i.idproduct - 1].Location }}
@@ -51,6 +51,29 @@
             </tr>
           </tbody>
         </table>
+        <div
+          class="px-5 py-4 bg-white dark:border-gray-900 dark:bg-gray-700 border-t flex flex-col xs:flex-row items-center xs:justify-between"
+        >
+          <div class="inline-flex mt-2 xs:mt-0">
+            <button
+              @click="x == 1 ? (x = 1) : x--"
+              class="text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+            >
+              Prev
+            </button>
+            <div
+              class="text-white bg-gradient-to-r from-pink-500 to-pink-700 hover:bg-gradient-to-br focus:ring-4 focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+            >
+              {{ x }}
+            </div>
+            <button
+              class="text-white bg-gradient-to-r from-pink-500 to-purple-500 hover:bg-gradient-to-l focus:ring-4 focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+              @click="dataUser.length / 5 - 1 < x - 1 ? x : x++"
+            >
+              Next
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -69,6 +92,7 @@ export default {
       dataUser: null,
       dataRoom: [],
       loading: false,
+      x: 1,
     };
   },
   mounted() {

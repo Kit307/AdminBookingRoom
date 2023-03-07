@@ -131,7 +131,11 @@ export default {
     },
     async upload1(Url) {
       // Add a new document with a generated id.
-
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = now.getMonth();
+      const day = now.getDate() - 3;
+      
       await setDoc(doc(db, "Room", (this.aaa.length + 1).toString()), {
         NameRoom: this.NameRoom,
         Details: this.Details,
@@ -139,6 +143,8 @@ export default {
         Location: this.Location,
         Img_Url: Url,
         IdRoom: this.aaa.length + 1,
+        satartDate: `${year}/${month}/${day}`,
+        stopDate: `${year}/${month}/${day + 100}`,
       });
       await this.aaaaaaa();
 

@@ -8,11 +8,13 @@ const router = createRouter({
   routes: [
     {
       path: "/admin",
+      name: "admin",
       component: Admin,
       children: [
         {
           path: "/admin/RoomDetel/:id",
           component: RoomDetel,
+          name: "admin/RoomDetel",
         },
       ],
     },
@@ -65,10 +67,12 @@ const router = createRouter({
       component: () => import("../components/BookintDetile.vue"),
     },
     {
+      name: "Profile",
       path: "/Profile",
       component: () => import("../components/ProFile.vue"),
     },
     {
+      name: "History",
       path: "/History",
       component: () => import("../components/History.vue"),
     },

@@ -121,6 +121,7 @@
 import Datepic from "./Datepic.vue";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../plugin/index";
+import { setDoc, onSnapshot, doc } from "firebase/firestore";
 import LoadingScreen from "../components/LoadingScreen.vue";
 import VueDatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
@@ -145,6 +146,7 @@ export default {
       timesasa: "",
       datezaza: "",
       datetext: "",
+      countBooking: 0,
     };
   },
   mounted() {
@@ -174,6 +176,7 @@ export default {
           Details: doc.data(),
         });
       });
+
       await this.ReadDetil();
       for (let index = 0; index < this.aaa.length; index++) {
         for (let j = 0; j < this.timeDate.length; j++) {
@@ -209,7 +212,7 @@ export default {
       this.product = false;
     },
     returnDate() {
-      const date = new Date(); // current date and time
+      const date = new Date(this.datezaza); // current date and time
 
       const options = {
         weekday: "long", // full day name (e.g. "วันเสาร์")
