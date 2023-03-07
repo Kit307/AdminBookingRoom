@@ -47,60 +47,62 @@
         </button>
       </div>
       <div class="grid grid-cols-4 gap-y-10 px-16">
-        <div
-          v-for="item in aaa"
-          class="max-w-sm bg-white border shadow-2xl border-gray-200 rounded-lg pb-10 dark:bg-gray-800 dark:border-gray-700 relative"
-        >
-          <a href="#">
-            <img
-              class="rounded-t-lg h-64 w-full object-cover"
-              :src="item.Details.Img_Url"
-              alt=""
-            />
-          </a>
-          <div class="p-5">
+        <div v-for="item in aaa">
+          <div
+            v-if="item.Details.show"
+            class="max-w-sm bg-white border shadow-2xl border-gray-200 rounded-lg pb-10 dark:bg-gray-800 dark:border-gray-700 relative"
+          >
             <a href="#">
-              <h5
-                class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
-              >
-                {{ item.Details.NameRoom }}
-                <span>({{ item.Details.Numbersit }})</span>
-              </h5>
+              <img
+                class="rounded-t-lg h-64 w-full object-cover"
+                :src="item.Details.Img_Url"
+                alt=""
+              />
             </a>
-            <div class="text-red-50">
+            <div class="p-5">
+              <a href="#">
+                <h5
+                  class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+                >
+                  {{ item.Details.NameRoom }}
+                  <span>({{ item.Details.Numbersit }})</span>
+                </h5>
+              </a>
+              <div class="text-red-50">
+                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                  <span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="bi bi-geo-alt-fill inline-block"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"
+                      />
+                    </svg>
+                  </span>
+                  {{ item.Details.Location }}
+                </p>
+              </div>
               <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                <span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    class="bi bi-geo-alt-fill inline-block"
-                    viewBox="0 0 16 16"
-                  >
-                    <path
-                      d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"
-                    />
-                  </svg>
-                </span>
-                {{ item.Details.Location }}
+                {{ edittext(item.Details.Details) }}
               </p>
-            </div>
-            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-              {{ edittext(item.Details.Details) }}
-            </p>
-            <div class="">
-              <div class="absolute bottom-2 tracking-[2px]">
-                <router-link
-                  :to="'/Bookingpage/' + item.Details.IdRoom"
-                  sss="asdasd"
-                  @click="
-                    (product = !product), (productdetail = !productdetail)
-                  "
-                  href="#"
-                  class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                  >ดูเพิ่มเติมและจอง
-                </router-link>
+              <div class="">
+                <div class="absolute bottom-2 tracking-[2px]">
+                  <router-link
+                    :to="'/Bookingpage/' + item.Details.IdRoom"
+                    sss="asdasd"
+                    @click="
+                      (product = !product), (productdetail = !productdetail)
+                    "
+                    href="#"
+                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    >ดูเพิ่มเติมและจอง
+                  </router-link>
+                </div>
               </div>
             </div>
           </div>

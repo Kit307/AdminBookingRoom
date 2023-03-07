@@ -5,7 +5,9 @@
       currentRouteName != 'admin' &&
       currentRouteName != 'admin/RoomDetel' &&
       currentRouteName != 'addpageadminHomepage' &&
-      currentRouteName != 'adminHomepage'
+      currentRouteName != 'adminHomepage' &&
+      currentRouteName != 'AddAdmin' &&
+      currentRouteName != 'addRoom'
     "
   >
     <div class="px-6 pt-6 lg:px-8 z-50">

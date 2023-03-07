@@ -174,10 +174,8 @@ export default {
 
         this.dataUser = data.flatMap((obj) => {
           if (obj.Time.length === 1) {
-            // If the object has only one time, return it as is
             return obj;
           } else {
-            // If the object has multiple times, create a new object for each time
             return obj.Time.map((time) => ({
               Time: [time],
               idproduct: obj.idproduct,
@@ -364,9 +362,10 @@ export default {
     },
     chackBookingDate() {
       const now = new Date();
+      now.setDate(now.getDate() - 1);
       const filteredSchedules = this.dataUser.filter((schedule) => {
         const scheduleDate = new Date(schedule.Day);
-        return scheduleDate >= now;
+        return scheduleDate > now;
       });
 
       const newSchedules = [];

@@ -25,7 +25,7 @@ const router = createRouter({
     },
     {
       path: "/admin/addRoom",
-      name: "addpage",
+      name: "addRoom",
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
@@ -58,6 +58,7 @@ const router = createRouter({
       component: () => import("../components/Bookingpage.vue"),
       children: [
         {
+          name: "Bookingpage/Detlie",
           path: "/Bookingpage/:id",
           component: BookingpageDet,
         },
@@ -80,6 +81,11 @@ const router = createRouter({
       name: "History",
       path: "/History",
       component: () => import("../components/History.vue"),
+    },
+    {
+      name: "AddAdmin",
+      path: "/AddAdmin",
+      component: () => import("../components/AddAdmin.vue"),
     },
   ],
 });

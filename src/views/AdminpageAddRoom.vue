@@ -6,52 +6,103 @@
       id="main-content"
     >
       <LoadingScreen v-show="Loading" />
-      {{ aaa.length }}
-      <form @submit.prevent="upload()">
-        <div>
-          <label for="">Name Room</label>
-          <input type="text" required v-model="NameRoom" />
-        </div>
 
-        <div>
-          <label for="">Number sit</label>
-          <input type="Number" required v-model="Numbersit" />
+      <div class="flex items-center justify-center p-12">
+        <!-- Author: FormBold Team -->
+        <!-- Learn More: https://formbold.com -->
+        <div class="mx-auto w-full max-w-[1000px]">
+          <form @submit.prevent="upload()">
+            <div class="mb-5">
+              <label
+                for="name"
+                class="mb-3 block text-base font-medium text-[#07074D]"
+              >
+                ชื่อห้อง
+              </label>
+              <input
+                required
+                type="text"
+                name="name"
+                placeholder="ชื่อห้อง"
+                v-model="NameRoom"
+                class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+              />
+            </div>
+            <div class="mb-5">
+              <label
+                for="email"
+                class="mb-3 block text-base font-medium text-[#07074D]"
+              >
+                จำนวนที่นั่ง
+              </label>
+              <input
+                required
+                type="number"
+                name="email"
+                v-model="Numbersit"
+                placeholder="0"
+                class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+              />
+            </div>
+            <div class="mb-5">
+              <label
+                for="subject"
+                class="mb-3 block text-base font-medium text-[#07074D]"
+              >
+                สถานที่อยู่
+              </label>
+              <input
+                required
+                type="text"
+                name="subject"
+                placeholder="ตึก80ปี"
+                v-model="Location"
+                class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+              />
+            </div>
+            <div class="mb-5">
+              <label
+                for="File image"
+                class="mb-3 block text-base font-medium text-[#07074D]"
+              >
+                ไฟล์รูปภาพห้อง
+              </label>
+              <label class="block">
+                <span class="sr-only">Choose File</span>
+                <input
+                  required
+                  type="file"
+                  @change="onFileSelete"
+                  class="block w-full bg-white text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-white file:text-blue-800 hover:file:bg-blue-100"
+                />
+              </label>
+            </div>
+            <div class="mb-5">
+              <label
+                for="message"
+                class="mb-3 block text-base font-medium text-[#07074D]"
+              >
+                รายละเอียดห้อง
+              </label>
+              <textarea
+                rows="4"
+                required
+                name="message"
+                placeholder="รายละเอียดห้อง"
+                v-model="Details"
+                class="w-full resize-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+              ></textarea>
+            </div>
+            <div>
+              <button
+                class="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-base font-semibold text-white outline-none"
+              >
+                Submit
+              </button>
+            </div>
+          </form>
         </div>
-        <div>
-          <label for="">Location</label>
-          <input type="text" required v-model="Location" />
-        </div>
-        <div>
-          <label for="">Details Room</label>
-          <!-- <input type="text" required /> -->
-          <textarea
-            name=""
-            id=""
-            cols="30"
-            rows="10"
-            required
-            v-model="Details"
-          ></textarea>
-        </div>
-        <div>
-          <label
-            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            for="file_input"
-            >Upload file</label
-          >
-          <input
-            class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-            id="file_input"
-            required
-            @change="onFileSelete"
-            type="file"
-          />
-        </div>
-        <button type="submit" class="py-2 px-2 mt-10 bg-blue-400">
-          Upload
-        </button>
-      </form>
-      <button @click="aaaaaaa()">sdasd</button>
+      </div>
     </div>
   </div>
 </template>
@@ -146,8 +197,7 @@ export default {
         Location: this.Location,
         Img_Url: Url,
         IdRoom: this.aaa.length + 1,
-        satartDate: `${year}/${month}/${day}`,
-        stopDate: `${year}/${month}/${day + 100}`,
+        show: true,
       });
       await this.aaaaaaa();
 
@@ -212,11 +262,11 @@ export default {
           d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate()
         );
       }
+      this.$router.replace("/admin/Detel");
     },
     readTotleRoom() {
       const unsub = onSnapshot(doc(db, "Admin", "TotleRoom"), (doc) => {
         this.TotleRoom = doc.data().TotleRoom;
-        console.log(doc.data().TotleRoom);
       });
     },
     async AddBookingCount() {
