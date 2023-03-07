@@ -187,7 +187,7 @@
 
 <script>
 import { createUserWithEmailAndPassword, signOut } from "firebase/auth";
-import { collection, doc, setDoc } from "firebase/firestore";
+import { collection, doc, setDoc, onSnapshot } from "firebase/firestore";
 import { auth, db } from "../plugin/index";
 export default {
   data() {
@@ -202,22 +202,19 @@ export default {
       errormessage: "asdasdasdasd",
       errorlogin: false,
       show: true,
+      UesrTotle: 0,
     };
   },
   methods: {
     reg() {
-      //   const auth = getAuth();
       if (this.cpassword == this.password) {
         (this.show = false),
           createUserWithEmailAndPassword(auth, this.email, this.password)
             .then((userCredential) => {
-              // Signed in
               const user = userCredential.user;
               this.profile();
-              // console.log(user);
               this.xx = user;
               this.errorlogin = false;
-              // ...
             })
             .catch((error) => {
               const errorCode = error.code;
@@ -250,6 +247,7 @@ export default {
         Email: user.email,
         totalMoney: 0,
       });
+      this.AddBookingCount();
       const citiesRef1 = collection(db, "cart");
       setDoc(doc(citiesRef1, user.uid), {
         UID: user.uid,
@@ -271,6 +269,20 @@ export default {
           console.log(error);
         });
     },
+    readUesrTotle() {
+      const unsub = onSnapshot(doc(db, "Admin", "UesrTotle"), (doc) => {
+        this.UesrTotle = doc.data().UesrTotle;
+        console.log(doc.data().UesrTotle);
+      });
+    },
+    async AddBookingCount() {
+      await setDoc(doc(db, "Admin", "UesrTotle"), {
+        UesrTotle: (this.UesrTotle += 1),
+      });
+    },
+  },
+  mounted() {
+    this.readUesrTotle();
   },
 };
 </script>

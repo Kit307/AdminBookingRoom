@@ -89,7 +89,6 @@ export default {
     },
     readDataCount() {
       const unsub = onSnapshot(doc(db, "Admin", "TotleBooking"), (doc) => {
-        console.log("Current data: ", doc.data());
         this.countBooking = doc.data().TotleBooking;
       });
     },

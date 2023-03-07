@@ -8,6 +8,11 @@ const router = createRouter({
   routes: [
     {
       path: "/admin",
+      name: "adminHomepage",
+      component: () => import("../views/AdminHomePage.vue"),
+    },
+    {
+      path: "/admin/Detel",
       name: "admin",
       component: Admin,
       children: [

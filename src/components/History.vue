@@ -389,7 +389,7 @@ export default {
       };
 
       const thaiDate = date.toLocaleDateString("th-TH", options);
-      this.datetext = thaiDate;
+      this.datetext = `${thaiDate} เวลา ${this.getTime(i.Time[0])}`;
       return thaiDate;
     },
     readDataCount() {

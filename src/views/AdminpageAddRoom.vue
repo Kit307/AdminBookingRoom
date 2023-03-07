@@ -58,7 +58,7 @@
 <script>
 import { ref } from "firebase/storage";
 import { storage, db } from "../plugin/index";
-import { collection, setDoc, doc } from "firebase/firestore";
+import { collection, setDoc, doc, onSnapshot } from "firebase/firestore";
 import { getDocs } from "firebase/firestore";
 import { uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import LoadingScreen from "../components/LoadingScreen.vue";
@@ -78,9 +78,12 @@ export default {
       progress: 0,
       aaa: [],
       Loading: false,
+      TotleRoom: 0,
     };
   },
-  mounted() {},
+  mounted() {
+    this.readTotleRoom();
+  },
   methods: {
     onFileSelete(even) {
       this.seleteFile = even.target.files[0];
@@ -135,7 +138,7 @@ export default {
       const year = now.getFullYear();
       const month = now.getMonth();
       const day = now.getDate() - 3;
-      
+      this.AddBookingCount();
       await setDoc(doc(db, "Room", (this.aaa.length + 1).toString()), {
         NameRoom: this.NameRoom,
         Details: this.Details,
@@ -209,6 +212,17 @@ export default {
           d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate()
         );
       }
+    },
+    readTotleRoom() {
+      const unsub = onSnapshot(doc(db, "Admin", "TotleRoom"), (doc) => {
+        this.TotleRoom = doc.data().TotleRoom;
+        console.log(doc.data().TotleRoom);
+      });
+    },
+    async AddBookingCount() {
+      await setDoc(doc(db, "Admin", "TotleRoom"), {
+        TotleRoom: (this.TotleRoom += 1),
+      });
     },
   },
 };

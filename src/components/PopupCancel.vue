@@ -3,7 +3,6 @@
     <div class="relative flex justify-center items-center">
       <div
         id="menu"
-        @click="$emit('add', Math.random())"
         class="w-full h-full bg-gray-600 bg-opacity-80 top-0 fixed sticky-0"
       >
         <div

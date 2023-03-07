@@ -33,7 +33,7 @@
     </div>
   </div>
   <div v-else>
-    <div class="bg-slate-50 h-screen" v-if="product">
+    <div class="bg-slate-50 pb-56" v-if="product">
       <!-- {{ time }}{{ aaa[0].Time.Time1.Booking == false }} -->
       <div
         class="font-black text-xl py-10 flex items-center justify-center gap-5"
@@ -46,10 +46,10 @@
           เลือกวันใหม่
         </button>
       </div>
-      <div class="grid grid-cols-4 gap-2 relative">
+      <div class="grid grid-cols-4 gap-y-10 px-16">
         <div
           v-for="item in aaa"
-          class="max-w-sm bg-white border shadow-2xl border-gray-200 rounded-lg pb-10 dark:bg-gray-800 dark:border-gray-700"
+          class="max-w-sm bg-white border shadow-2xl border-gray-200 rounded-lg pb-10 dark:bg-gray-800 dark:border-gray-700 relative"
         >
           <a href="#">
             <img
@@ -89,8 +89,8 @@
             <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
               {{ edittext(item.Details.Details) }}
             </p>
-            <div class="flex">
-              <div class="absolute bottom-6 tracking-[2px]">
+            <div class="">
+              <div class="absolute bottom-2 tracking-[2px]">
                 <router-link
                   :to="'/Bookingpage/' + item.Details.IdRoom"
                   sss="asdasd"

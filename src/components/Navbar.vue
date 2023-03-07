@@ -4,7 +4,8 @@
     v-show="
       currentRouteName != 'admin' &&
       currentRouteName != 'admin/RoomDetel' &&
-      currentRouteName != 'addpage'
+      currentRouteName != 'addpageadminHomepage' &&
+      currentRouteName != 'adminHomepage'
     "
   >
     <div class="px-6 pt-6 lg:px-8 z-50">
