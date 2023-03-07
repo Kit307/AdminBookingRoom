@@ -13,19 +13,19 @@
             class="w-96 md:w-auto relative flex flex-col justify-center items-center bg-white py-16 px-4 md:px-24 xl:py-24 xl:px-36 rounded-3xl"
           >
             <div role="banner">
-              <img src="../assets/confirmation.png" alt="" class="h-32" />
+              <img src="../assets/cancel.png" alt="" class="h-32" />
             </div>
             <div class="mt-12">
               <h1
                 role="main"
-                class="text-3xl lg:text-4xl font-semibold leading-7 lg:leading-9 text-center text-gray-800"
+                class="text-3xl lg:text-4xl font-semibold leading-7 lg:leading-9 text-center text-red-500"
               >
-                คุณตั้งการจองจริงๆใช่ไหม
+                คุณตั้งการยกเลิกการจองจริงๆใช่ไหม
               </h1>
             </div>
             <div class="mt">
               <p
-                class="mt-6 sm:w-80 text-base leading-7 text-center text-gray-800"
+                class="mt-6 sm:w-80 text-2xl leading-7 text-center text-red-900 font-extrabold"
               >
                 {{ datezaza }}
               </p>

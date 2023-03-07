@@ -11,8 +11,9 @@
             <tr>
               <th scope="col" class="px-6 py-3">#</th>
               <th scope="col" class="px-6 py-3">NameRoom</th>
-              <th scope="col" class="px-6 py-3">Location</th>
               <th scope="col" class="px-6 py-3">Date</th>
+              <th scope="col" class="px-6 py-3">Location</th>
+
               <th scope="col" class="px-6 py-3">Time</th>
               <th scope="col" class="px-6 py-3">Action</th>
             </tr>
@@ -35,14 +36,16 @@
               >
                 {{ dataRoom[i.idproduct - 1].NameRoom }} {{ index }}
               </th>
+              <td class="px-6 py-4">{{ returnDate(i) }}</td>
               <td class="px-6 py-4">
                 {{ dataRoom[i.idproduct - 1].Location }}
               </td>
-              <td class="px-6 py-4">{{ getDate(i.Day) }}</td>
+
               <td class="px-6 py-4">{{ getTime(i.Time[0]) }}</td>
 
               <td class="px-6 py-4">
                 <a
+                  @click="returnDate(i), (popup = true), (iofClick = index)"
                   href="#"
                   class="font-medium text-red-600 dark:text-red-500 hover:underline"
                   >Cancel</a
@@ -78,21 +81,39 @@
     </div>
   </div>
   <LoadingScreen v-show="loading" />
+  <PopupCancel
+    :datezaza="datetext"
+    v-show="popup"
+    @add="popup = false"
+    @confirm="cancelBooking()"
+  ></PopupCancel>
 </template>
 <script>
+import PopupCancel from "./PopupCancel.vue";
 import LoadingScreen from "./LoadingScreen.vue";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc, getDocs, collection } from "firebase/firestore";
 import { db, auth } from "../plugin/index";
+import { setDoc, onSnapshot } from "firebase/firestore";
 export default {
-  components: { LoadingScreen },
+  components: {
+    PopupCancel,
+    LoadingScreen,
+  },
   data() {
     return {
       uid: "",
       dataUser: null,
+      dataUser2: null,
       dataRoom: [],
       loading: false,
       x: 1,
+      dataclick: 0,
+      popup: false,
+      datacancle: [],
+      iofClick: 0,
+      datetext: "",
+      countBooking: 0,
     };
   },
   mounted() {
@@ -109,6 +130,8 @@ export default {
           this.login = false;
           await this.readBookProfile();
           await this.readRoomDetail();
+          this.readDataCount();
+          this.chackBookingDate();
           this.loading = false;
         } else {
           this.$router.replace("/login");
@@ -138,9 +161,10 @@ export default {
         return dateA - dateB;
       });
 
-      console.log(data);
+      // console.log(data);
       if (docSnap.exists()) {
         this.dataUser = docSnap.data().Product;
+        this.dataUser2 = docSnap.data().Product;
         this.dataUser.sort((a, b) => {
           const dateA = new Date(a.Day);
           const dateB = new Date(b.Day);
@@ -191,6 +215,193 @@ export default {
         default:
           break;
       }
+    },
+    async cancelBooking() {
+      this.loading = true;
+      let d = new Date(this.dataUser[this.iofClick].Day);
+      const docRef = doc(
+        db,
+        "RoomDetail/" +
+          d.getFullYear() +
+          "-" +
+          (d.getMonth() + 1) +
+          "/" +
+          d.getDate(),
+        this.dataUser[this.iofClick].idproduct
+      );
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        this.datacancle = docSnap.data();
+      }
+      switch (this.dataUser[this.iofClick].Time[0]) {
+        case 1:
+          await setDoc(
+            doc(
+              db,
+              "RoomDetail/" +
+                d.getFullYear() +
+                "-" +
+                (d.getMonth() + 1) +
+                "/" +
+                d.getDate(),
+              this.dataUser[this.iofClick].idproduct
+            ),
+            {
+              Time1: {
+                IdRoom: this.dataUser[this.iofClick].idproduct,
+                IdUserBooking: null,
+                Booking: null,
+                IdTime: 1,
+                Time: "9:00 - 12:00",
+                Day:
+                  d.getFullYear() +
+                  "/" +
+                  (d.getMonth() + 1) +
+                  "/" +
+                  d.getDate(),
+              },
+              Time2: this.datacancle.Time2,
+              Time3: this.datacancle.Time3,
+            }
+          );
+          break;
+        case 2:
+          await setDoc(
+            doc(
+              db,
+              "RoomDetail/" +
+                d.getFullYear() +
+                "-" +
+                (d.getMonth() + 1) +
+                "/" +
+                d.getDate(),
+              this.dataUser[this.iofClick].idproduct
+            ),
+            {
+              Time1: this.datacancle.Time1,
+              Time2: {
+                IdRoom: this.dataUser[this.iofClick].idproduct,
+                IdUserBooking: null,
+                Booking: null,
+                IdTime: 1,
+                Time: "12:00 - 15:00",
+                Day:
+                  d.getFullYear() +
+                  "/" +
+                  (d.getMonth() + 1) +
+                  "/" +
+                  d.getDate(),
+              },
+              Time3: this.datacancle.Time3,
+            }
+          );
+          break;
+        case 3:
+          await setDoc(
+            doc(
+              db,
+              "RoomDetail/" +
+                d.getFullYear() +
+                "-" +
+                (d.getMonth() + 1) +
+                "/" +
+                d.getDate(),
+              this.dataUser[this.iofClick].idproduct
+            ),
+            {
+              Time1: this.datacancle.Time1,
+              Time2: this.datacancle.Time2,
+              Time3: {
+                IdRoom: this.dataUser[this.iofClick].idproduct,
+                IdUserBooking: null,
+                Booking: null,
+                IdTime: 1,
+                Time: "15:00 - 18:00",
+                Day:
+                  d.getFullYear() +
+                  "/" +
+                  (d.getMonth() + 1) +
+                  "/" +
+                  d.getDate(),
+              },
+            }
+          );
+          break;
+        default:
+          break;
+      }
+      for (let index = 0; index < this.dataUser2.length; index++) {
+        if (this.dataUser2[index].Day == this.dataUser[this.iofClick].Day) {
+          console.log(this.dataUser2[index].Time.length > 1);
+          if (this.dataUser2[index].Time.length > 1) {
+            for (let j = 0; j < this.dataUser2[index].Time.length; j++) {
+              console.log(this.dataUser2[index].Time);
+              if (
+                this.dataUser2[index].Time[j] ==
+                this.dataUser[this.iofClick].Time[0]
+              ) {
+                this.dataUser2[index].Time.splice(j, 1);
+                break;
+              }
+              console.log(this.dataUser2[index].Time);
+            }
+          } else {
+            this.dataUser2.splice(index, 1);
+          }
+        }
+      }
+      const user = auth.currentUser;
+      const citiesRef = collection(db, "cart");
+      await setDoc(doc(citiesRef, user.uid), {
+        UID: user.uid,
+        Product: this.dataUser2,
+      });
+      await this.readBookProfile();
+      await this.readRoomDetail();
+      await this.AddBookingCount();
+      this.chackBookingDate();
+      this.loading = false;
+    },
+    chackBookingDate() {
+      const now = new Date();
+      const filteredSchedules = this.dataUser.filter((schedule) => {
+        const scheduleDate = new Date(schedule.Day);
+        return scheduleDate >= now;
+      });
+
+      const newSchedules = [];
+
+      filteredSchedules.forEach((schedule) => {
+        newSchedules.push(schedule);
+      });
+      this.dataUser = newSchedules;
+    },
+    returnDate(i) {
+      // console.log(i);
+      const date = new Date(i.Day); // current date and time
+      const options = {
+        weekday: "long", // full day name (e.g. "วันเสาร์")
+        year: "numeric", // year (e.g. "2566")
+        month: "long", // full month name (e.g. "มกราคม")
+        day: "numeric", // day of the month (e.g. "6")
+        timeZone: "Asia/Bangkok", // specify timezone (optional)
+        localeMatcher: "best fit", // locale matching algorithm (optional)
+      };
+
+      const thaiDate = date.toLocaleDateString("th-TH", options);
+      this.datetext = thaiDate;
+      return thaiDate;
+    },
+    readDataCount() {
+      const unsub = onSnapshot(doc(db, "Admin", "TotleBooking"), (doc) => {
+        console.log("Current data: ", doc.data());
+        this.countBooking = doc.data().TotleBooking;
+      });
+    },
+    async AddBookingCount() {
+      await setDoc(doc(db, "Admin", "TotleBooking"), {
+        TotleBooking: (this.countBooking -= 1),
+      });
     },
   },
 };
