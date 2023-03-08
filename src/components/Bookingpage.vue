@@ -53,7 +53,6 @@
       >
         <div v-for="item in aaa">
           <div
-            v-if="item.Details.show"
             class="max-w-sm bg-white border shadow-2xl border-gray-200 rounded-lg pb-10 dark:bg-gray-800 dark:border-gray-700 relative hover:-translate-y-5 transition ease-in-out duration-300 delay-75 hover:scale-110"
           >
             <a href="#">
@@ -178,9 +177,11 @@ export default {
       this.product = true;
       const querySnapshot = await getDocs(collection(db, "Room"));
       querySnapshot.forEach(async (doc) => {
-        this.aaa.push({
-          Details: doc.data(),
-        });
+        if (doc.data().show) {
+          this.aaa.push({
+            Details: doc.data(),
+          });
+        }
       });
 
       await this.ReadDetil();
@@ -254,6 +255,14 @@ export default {
 
       this.maxDate = maxDate.toISOString().slice(0, 10);
     },
+    getStle(i) {
+      if (i) {
+      } else {
+        return "hidden";
+      }
+    },
+
+    // v-if="item.Details.show"
   },
 };
 </script>
