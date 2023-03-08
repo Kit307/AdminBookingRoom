@@ -43,7 +43,13 @@
 
               <td class="px-6 py-4">
                 <a
-                  @click="returnDate(i), (popup = true), (iofClick = index)"
+                  @click="
+                    returnDate(i),
+                      (popup = true),
+                      (iofClick = index),
+                      readDataCount(),
+                      chackBookingDate()
+                  "
                   href="#"
                   class="font-medium text-red-600 dark:text-red-500 hover:underline"
                   >Cancel</a
@@ -127,8 +133,6 @@ export default {
           this.login = false;
           await this.readBookProfile();
           await this.readRoomDetail();
-          this.readDataCount();
-          this.chackBookingDate();
           this.loading = false;
         } else {
           this.$router.replace("/login");
@@ -137,12 +141,15 @@ export default {
     },
     async readRoomDetail() {
       const querySnapshot = await getDocs(collection(db, "Room"));
+      console.log("readRoomDetail");
       querySnapshot.forEach((doc) => {
         this.dataRoom.push(doc.data());
       });
       this.dataRoom.sort((a, b) => a.IdRoom - b.IdRoom);
     },
     async readBookProfile() {
+      console.log("readBookProfile");
+
       const docRef = doc(db, "cart", this.uid);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
@@ -171,6 +178,7 @@ export default {
     },
     getDate(d) {
       const date = new Date(d);
+      console.log("getDate");
 
       // Extract the day, month, and year from the date object
       const day = date.getDate();
@@ -181,6 +189,8 @@ export default {
       return `${day}/${month}/${year}`;
     },
     getTime(i) {
+      console.log("getTime");
+
       switch (i) {
         case 1:
           return "9:00 - 12:00";
@@ -196,6 +206,8 @@ export default {
       }
     },
     async cancelBooking() {
+      console.log("cancelBooking");
+
       this.loading = true;
       let d = new Date(this.dataUser[this.iofClick].Day);
       const docRef = doc(
@@ -339,6 +351,7 @@ export default {
       this.loading = false;
     },
     chackBookingDate() {
+      console.log("chackBookingDate");
       const now = new Date();
       now.setDate(now.getDate() - 1);
       const filteredSchedules = this.dataUser.filter((schedule) => {
@@ -352,6 +365,8 @@ export default {
       this.dataUser = newSchedules;
     },
     returnDate(i) {
+      console.log("returnDate");
+
       const date = new Date(i.Day); // current date and time
       const options = {
         weekday: "long", // full day name (e.g. "วันเสาร์")
@@ -367,6 +382,8 @@ export default {
       return thaiDate;
     },
     readDataCount() {
+      console.log("readDataCount");
+
       const unsub = onSnapshot(doc(db, "Admin", "TotleBooking"), (doc) => {
         this.countBooking = doc.data().TotleBooking;
       });
