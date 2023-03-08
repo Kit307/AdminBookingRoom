@@ -4,7 +4,11 @@
     id="main-nav"
   >
     <div class="w-full h-20 border-b flex px-4 items-center mb-8">
-      <p class="font-semibold text-3xl text-blue-400 pl-4">LOGO</p>
+      <span
+        class="font-black text-emerald-700"
+        style="font-family: 'Pacifico', cursive"
+        >MRR</span
+      >
     </div>
 
     <div class="mb-4 px-4">
@@ -79,14 +83,13 @@
     </div>
   </div>
   <div class="flex justify-between lg:hidden bg-slate-50 px-6 pt-6">
-    <div class="flex lg:flex-1">
+    <div class="flex lg:flex-1" @click="$router.replace('/')">
       <a href="#" class="-m-1.5 p-1.5">
-        <span class="sr-only"></span>
-        <img
-          class="h-8"
-          src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-          alt=""
-        />
+        <span
+          class="font-black text-emerald-700"
+          style="font-family: 'Pacifico', cursive"
+          >MRR</span
+        >
       </a>
     </div>
     <div class="flex lg:hidden">
@@ -118,14 +121,16 @@
       focus="true"
       class="fixed inset-0 z-10 overflow-y-auto bg-white px-6 py-6 lg:hidden"
     >
-      <div class="flex items-center justify-between">
-        <a href="#" class="-m-1.5 p-1.5">
-          <span class="sr-only">asdsds</span>
-          <img
-            class="h-8"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-            alt=""
-          />
+      <div
+        class="flex items-center justify-between"
+        @click="$router.replace('/'), (navbar = false)"
+      >
+        <a href="#">
+          <span
+            class="font-black text-emerald-700"
+            style="font-family: 'Pacifico', cursive"
+            >MRR</span
+          >
         </a>
         <button
           type="button"
@@ -156,7 +161,7 @@
             <div class="mb-4 px-4">
               <p class="pl-4 text-sm font-semibold mb-1">MAIN</p>
               <div
-                @click="$router.replace('/admin')"
+                @click="$router.replace('/admin'), (navbar = false)"
                 class="w-full flex items-center text-blue-400 h-10 pl-4 bg-gray-200 hover:bg-gray-200 rounded-lg cursor-pointer"
               >
                 <svg class="h-6 w-6 fill-current mr-2" viewBox="0 0 20 20">

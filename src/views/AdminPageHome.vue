@@ -668,6 +668,7 @@ export default {
       });
       await this.test();
       this.popup2 = false;
+      this.deletepopup = false;
       await this.AddBookingCount();
       this.Loading = false;
     },

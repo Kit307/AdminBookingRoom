@@ -83,7 +83,7 @@
     :datezaza="datetext"
     v-show="popup"
     @add="popup = false"
-    @confirm="cancelBooking()"
+    @confirm="cancelBooking(), (popup = false)"
   ></PopupCancel>
 </template>
 <script>

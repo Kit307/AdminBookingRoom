@@ -10,14 +10,17 @@
       currentRouteName != 'addRoom'
     "
   >
-    <div class="px-6 pt-6 lg:px-8 z-50">
+    <div class="px-6 py-3 lg:px-8 z-50">
       <nav class="flex items-center justify-between" aria-label="Global">
-        <div class="flex lg:flex-1">
+        <div
+          class="flex lg:flex-1"
+          @click="$router.replace('/'), (navbar = false)"
+        >
           <a href="#" class="-m-1.5 p-1.5">
             <span
               class="font-black text-emerald-700"
               style="font-family: 'Pacifico', cursive"
-              >MMR</span
+              >MRR</span
             >
           </a>
         </div>
@@ -111,13 +114,16 @@
           focus="true"
           class="fixed inset-0 z-10 overflow-y-auto bg-white px-6 py-6 lg:hidden"
         >
-          <div class="flex items-center justify-between">
+          <div
+            class="flex items-center justify-between"
+            @click="$router.replace('/'), (navbar = false)"
+          >
             <a href="#" class="-m-1.5 p-1.5">
               <a href="#" class="-m-1.5 p-1.5">
                 <span
                   class="font-black text-emerald-700"
                   style="font-family: 'Pacifico', cursive"
-                  >MMR</span
+                  >MRR</span
                 >
               </a>
             </a>
