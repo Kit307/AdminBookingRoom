@@ -1,5 +1,4 @@
 <template>
-  <p @click="getDatezaza()">asdsadsa</p>
   <div class="h-screen bg-slate-50 flex justify-center items-center">
     <div class="md:overflow-x-hidden overflow-x-scroll">
       <div class="md: shadow-2xl sm:rounded-lg">
@@ -151,7 +150,6 @@ export default {
     },
     async readBookProfile() {
       console.log("readBookProfile");
-
       const docRef = doc(db, "cart", this.uid);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
@@ -177,18 +175,6 @@ export default {
       } else {
         // doc.data() will be undefined in this case
       }
-    },
-    getDate(d) {
-      const date = new Date(d);
-      console.log("getDate");
-
-      // Extract the day, month, and year from the date object
-      const day = date.getDate();
-      const month = date.getMonth() + 1; // add 1 since month is zero-indexed
-      const year = date.getFullYear();
-
-      // Create a string with the desired date format
-      return `${day}/${month}/${year}`;
     },
 
     async cancelBooking() {
@@ -334,6 +320,7 @@ export default {
       await this.readRoomDetail();
       await this.AddBookingCount();
       this.chackBookingDate();
+      this.getDatezaza();
       this.loading = false;
     },
     chackBookingDate() {
@@ -381,7 +368,6 @@ export default {
         const thaiDate = date.toLocaleDateString("th-TH", options);
         this.datetext = `${thaiDate} เวลา ${x}`;
         this.DateRoom.push({ thai: thaiDate, time: x });
-        console.log(this.dataUser[i]);
       }
     },
     readDataCount() {

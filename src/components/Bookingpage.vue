@@ -51,9 +51,9 @@
       <div
         class="grid xl:grid-cols-4 md:grid-cols-2 gap-y-10 md:gap-x-10 lg:px-16 px-5"
       >
-        <div v-for="item in aaa">
+        <div v-for="item in aaa" class="h-full">
           <div
-            class="max-w-sm bg-white border shadow-2xl border-gray-200 rounded-lg pb-10 dark:bg-gray-800 dark:border-gray-700 relative hover:-translate-y-5 transition ease-in-out duration-300 delay-75 hover:scale-110"
+            class="max-w-sm h-full border shadow-2xl border-gray-200 rounded-lg pb-10 dark:bg-gray-800 dark:border-gray-700 relative hover:-translate-y-5 transition ease-in-out duration-300 delay-75 hover:scale-110"
           >
             <a href="#">
               <img
@@ -68,7 +68,9 @@
                   class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
                 >
                   {{ item.Details.NameRoom }}
-                  <span class="text-lg">( จำนวนที่นั่ง {{ item.Details.Numbersit }} )</span>
+                  <span class="text-lg"
+                    >( จำนวนที่นั่ง {{ item.Details.Numbersit }} )</span
+                  >
                 </h5>
               </a>
               <div class="text-red-50">
@@ -250,10 +252,10 @@ export default {
       const month = now.getMonth() + 1;
       const day = now.getDate();
       this.time = year + "/" + month + "/" + day;
-      this.timestart = date.toISOString().slice(0, 10);
-      const maxDate = new Date(year, month - 1, day + 8);
+      this.timestart = date;
+      const maxDate = new Date(year, month - 1, day + 7);
 
-      this.maxDate = maxDate.toISOString().slice(0, 10);
+      this.maxDate = maxDate;
     },
     getStle(i) {
       if (i) {
