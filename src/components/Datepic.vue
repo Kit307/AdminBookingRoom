@@ -14,6 +14,7 @@
             minDate="2023-3-1"
             maxDate="2023-3-9"
             required
+            auto-apply
           />
           <button
             type="submit"

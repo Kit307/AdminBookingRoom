@@ -21,7 +21,7 @@
                 ><router-link
                   @click="$emit('clase', Math.random())"
                   :to="'/Bookingpage/'"
-                  class="underline  underline-offset-4 hover:text-red-800 hover:font-black "
+                  class="underline underline-offset-4 hover:text-red-800 hover:font-black"
                 >
                   ย้อนกลับ
                 </router-link></a
@@ -158,7 +158,11 @@ export default {
   },
   methods: {
     asd() {
-      this.adddatatocart();
+      if (this.login) {
+        this.adddatatocart();
+      } else {
+        this.$router.replace("/login");
+      }
     },
     chackLogin() {
       onAuthStateChanged(auth, (user) => {

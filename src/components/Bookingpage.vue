@@ -19,7 +19,9 @@
               format="dd/MM/yyyy"
               :minDate="timestart"
               :maxDate="maxDate"
+              auto-apply
               required
+              disable-month-year-select
             />
             <button
               type="submit"
@@ -52,7 +54,7 @@
         <div v-for="item in aaa">
           <div
             v-if="item.Details.show"
-            class="max-w-sm bg-white border shadow-2xl border-gray-200 rounded-lg pb-10 dark:bg-gray-800 dark:border-gray-700 relative hover:-translate-y-5 transition ease-in-out duration-300 delay-75 hover:scale-110" 
+            class="max-w-sm bg-white border shadow-2xl border-gray-200 rounded-lg pb-10 dark:bg-gray-800 dark:border-gray-700 relative hover:-translate-y-5 transition ease-in-out duration-300 delay-75 hover:scale-110"
           >
             <a href="#">
               <img

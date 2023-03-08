@@ -1,6 +1,6 @@
 <template>
   <div class="h-screen bg-slate-50 flex justify-center items-center">
-    <div class="overflow-x-scroll">
+    <div class="md:overflow-x-hidden overflow-x-scroll">
       <div class="md: shadow-2xl sm:rounded-lg">
         <table class="text-sm text-left text-gray-500 dark:text-gray-400">
           <thead
@@ -32,7 +32,7 @@
                 scope="row"
                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
               >
-                {{ dataRoom[i.idproduct - 1].NameRoom }} {{ index }}
+                {{ dataRoom[i.idproduct - 1].NameRoom }}
               </th>
               <td class="px-6 py-4">{{ returnDate(i) }}</td>
               <td class="px-6 py-4">
@@ -119,7 +119,6 @@ export default {
   },
   methods: {
     chackLogin() {
-      // const auth = getAuth();
       this.loading = true;
       onAuthStateChanged(auth, async (user) => {
         if (user) {
@@ -139,27 +138,13 @@ export default {
     async readRoomDetail() {
       const querySnapshot = await getDocs(collection(db, "Room"));
       querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
         this.dataRoom.push(doc.data());
       });
-
       this.dataRoom.sort((a, b) => a.IdRoom - b.IdRoom);
     },
     async readBookProfile() {
       const docRef = doc(db, "cart", this.uid);
       const docSnap = await getDoc(docRef);
-      const data = [
-        { Time: [2], idproduct: "2", Day: "2023/3/8" },
-        { Day: "2023/3/14", Time: [3], idproduct: "2" },
-      ];
-
-      data.sort((a, b) => {
-        const dateA = new Date(a.Day);
-        const dateB = new Date(b.Day);
-        return dateA - dateB;
-      });
-
-   
       if (docSnap.exists()) {
         this.dataUser = docSnap.data().Product;
         this.dataUser2 = docSnap.data().Product;
@@ -169,7 +154,6 @@ export default {
           return dateA - dateB;
         });
         const data = this.dataUser;
-
         this.dataUser = data.flatMap((obj) => {
           if (obj.Time.length === 1) {
             return obj;
@@ -183,7 +167,6 @@ export default {
         });
       } else {
         // doc.data() will be undefined in this case
-        
       }
     },
     getDate(d) {
@@ -328,10 +311,8 @@ export default {
       }
       for (let index = 0; index < this.dataUser2.length; index++) {
         if (this.dataUser2[index].Day == this.dataUser[this.iofClick].Day) {
-          
           if (this.dataUser2[index].Time.length > 1) {
             for (let j = 0; j < this.dataUser2[index].Time.length; j++) {
-              
               if (
                 this.dataUser2[index].Time[j] ==
                 this.dataUser[this.iofClick].Time[0]
@@ -339,7 +320,6 @@ export default {
                 this.dataUser2[index].Time.splice(j, 1);
                 break;
               }
-              
             }
           } else {
             this.dataUser2.splice(index, 1);
@@ -365,16 +345,13 @@ export default {
         const scheduleDate = new Date(schedule.Day);
         return scheduleDate > now;
       });
-
       const newSchedules = [];
-
       filteredSchedules.forEach((schedule) => {
         newSchedules.push(schedule);
       });
       this.dataUser = newSchedules;
     },
     returnDate(i) {
-      
       const date = new Date(i.Day); // current date and time
       const options = {
         weekday: "long", // full day name (e.g. "วันเสาร์")
@@ -391,7 +368,6 @@ export default {
     },
     readDataCount() {
       const unsub = onSnapshot(doc(db, "Admin", "TotleBooking"), (doc) => {
-       
         this.countBooking = doc.data().TotleBooking;
       });
     },

@@ -14,12 +14,11 @@
       <nav class="flex items-center justify-between" aria-label="Global">
         <div class="flex lg:flex-1">
           <a href="#" class="-m-1.5 p-1.5">
-            <span class="sr-only"></span>
-            <img
-              class="h-8"
-              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-              alt=""
-            />
+            <span
+              class="font-black text-emerald-700"
+              style="font-family: 'Pacifico', cursive"
+              >MMR</span
+            >
           </a>
         </div>
         <div class="flex lg:hidden">
@@ -114,12 +113,13 @@
         >
           <div class="flex items-center justify-between">
             <a href="#" class="-m-1.5 p-1.5">
-              <span class="sr-only">asdsds</span>
-              <img
-                class="h-8"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                alt=""
-              />
+              <a href="#" class="-m-1.5 p-1.5">
+                <span
+                  class="font-black text-emerald-700"
+                  style="font-family: 'Pacifico', cursive"
+                  >MMR</span
+                >
+              </a>
             </a>
             <button
               type="button"
@@ -238,7 +238,7 @@ export default {
           // console.log(uid);
           this.uid = uid;
           this.login = false;
-         
+
           this.readData();
           // ...แสดงผล user, email, id ในจอ
         } else {
@@ -255,7 +255,7 @@ export default {
           // Sign-outsuccessful.
           //   this.$router.push("/");
           this.$router.replace("/login");
-        
+
           this.logoutvar = false;
         })
         .catch((error) => {
@@ -266,7 +266,6 @@ export default {
     readData() {
       const user = auth.currentUser;
       onSnapshot(doc(db, "Profile", user.uid), (doc) => {
-        
         this.profiledata = doc.data();
       });
     },
