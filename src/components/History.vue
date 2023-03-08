@@ -45,8 +45,7 @@
               <td class="px-6 py-4">
                 <a
                   @click="
-                    returnDate(i),
-                      (popup = true),
+                    (popup = true),
                       (iofClick = index),
                       readDataCount(),
                       chackBookingDate()
@@ -351,43 +350,12 @@ export default {
       });
       this.dataUser = newSchedules;
     },
-    returnDate(i) {
-      console.log("returnDate");
-      let x = "";
-      switch (i.Time[0]) {
-        case 1:
-          x = "9:00 - 12:00";
-          break;
-        case 2:
-          x = "12:00 - 15:00";
-          break;
-        case 3:
-          x = "15:00 - 18:00";
-          break;
-        default:
-          break;
-      }
-      const date = new Date(i.Day); // current date and time
-      const options = {
-        weekday: "long", // full day name (e.g. "วันเสาร์")
-        year: "numeric", // year (e.g. "2566")
-        month: "long", // full month name (e.g. "มกราคม")
-        day: "numeric", // day of the month (e.g. "6")
-        timeZone: "Asia/Bangkok", // specify timezone (optional)
-        localeMatcher: "best fit", // locale matching algorithm (optional)
-      };
 
-      const thaiDate = date.toLocaleDateString("th-TH", options);
-      this.datetext = `${thaiDate} เวลา ${x}`;
-      for (let i = 0; i < this.dataUser.length; i++) {
-        this.DateRoom.push({ thai: thaiDate, time: x });
-      }
-      return thaiDate;
-    },
     getDatezaza() {
+      this.DateRoom = [];
       let x = "";
       for (let i = 0; i < this.dataUser.length; i++) {
-        console.log("returnDate");
+        console.log("returnDateza");
         switch (this.dataUser[i].Time[0]) {
           case 1:
             x = "9:00 - 12:00";
