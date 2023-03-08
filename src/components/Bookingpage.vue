@@ -68,7 +68,7 @@
                   class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
                 >
                   {{ item.Details.NameRoom }}
-                  <span>({{ item.Details.Numbersit }})</span>
+                  <span class="text-lg">( จำนวนที่นั่ง {{ item.Details.Numbersit }} )</span>
                 </h5>
               </a>
               <div class="text-red-50">
