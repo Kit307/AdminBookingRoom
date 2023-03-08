@@ -1,5 +1,5 @@
 <template>
-  {{ dataUser }}
+  <p @click="getDatezaza()">asdsadsa</p>
   <div class="h-screen bg-slate-50 flex justify-center items-center">
     <div class="md:overflow-x-hidden overflow-x-scroll">
       <div class="md: shadow-2xl sm:rounded-lg">
@@ -35,12 +35,12 @@
               >
                 {{ dataRoom[i.idproduct - 1].NameRoom }}
               </th>
-              <td class="px-6 py-4">{{ returnDate(i) }}</td>
+              <td class="px-6 py-4">{{ DateRoom[index].thai }}</td>
               <td class="px-6 py-4">
                 {{ dataRoom[i.idproduct - 1].Location }}
               </td>
 
-              <td class="px-6 py-4">{{ i.Time[0] }}</td>
+              <td class="px-6 py-4">{{ DateRoom[index].time }}</td>
 
               <td class="px-6 py-4">
                 <a
@@ -111,6 +111,7 @@ export default {
       dataUser: null,
       dataUser2: null,
       dataRoom: [],
+      DateRoom: [],
       loading: false,
       x: 1,
       dataclick: 0,
@@ -134,6 +135,7 @@ export default {
           this.login = false;
           await this.readBookProfile();
           await this.readRoomDetail();
+          this.getDatezaza();
           this.loading = false;
         } else {
           this.$router.replace("/login");
@@ -377,7 +379,42 @@ export default {
 
       const thaiDate = date.toLocaleDateString("th-TH", options);
       this.datetext = `${thaiDate} เวลา ${x}`;
+      for (let i = 0; i < this.dataUser.length; i++) {
+        this.DateRoom.push({ thai: thaiDate, time: x });
+      }
       return thaiDate;
+    },
+    getDatezaza() {
+      let x = "";
+      for (let i = 0; i < this.dataUser.length; i++) {
+        console.log("returnDate");
+        switch (this.dataUser[i].Time[0]) {
+          case 1:
+            x = "9:00 - 12:00";
+            break;
+          case 2:
+            x = "12:00 - 15:00";
+            break;
+          case 3:
+            x = "15:00 - 18:00";
+            break;
+          default:
+            break;
+        }
+        const date = new Date(this.dataUser[i].Day); // current date and time
+        const options = {
+          weekday: "long", // full day name (e.g. "วันเสาร์")
+          year: "numeric", // year (e.g. "2566")
+          month: "long", // full month name (e.g. "มกราคม")
+          day: "numeric", // day of the month (e.g. "6")
+          timeZone: "Asia/Bangkok", // specify timezone (optional)
+          localeMatcher: "best fit", // locale matching algorithm (optional)
+        };
+        const thaiDate = date.toLocaleDateString("th-TH", options);
+        this.datetext = `${thaiDate} เวลา ${x}`;
+        this.DateRoom.push({ thai: thaiDate, time: x });
+        console.log(this.dataUser[i]);
+      }
     },
     readDataCount() {
       console.log("readDataCount");
