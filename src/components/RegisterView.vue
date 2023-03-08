@@ -272,7 +272,7 @@ export default {
     readUesrTotle() {
       const unsub = onSnapshot(doc(db, "Admin", "UesrTotle"), (doc) => {
         this.UesrTotle = doc.data().UesrTotle;
-        console.log(doc.data().UesrTotle);
+        
       });
     },
     async AddBookingCount() {

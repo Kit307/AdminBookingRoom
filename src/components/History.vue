@@ -1,10 +1,8 @@
 <template>
   <div class="h-screen bg-slate-50 flex justify-center items-center">
-    <div class="">
-      <div class="relative overflow-x-auto shadow-2xl sm:rounded-lg">
-        <table
-          class="w-full text-sm text-left text-gray-500 dark:text-gray-400"
-        >
+    <div class="overflow-x-scroll">
+      <div class="md: shadow-2xl sm:rounded-lg">
+        <table class="text-sm text-left text-gray-500 dark:text-gray-400">
           <thead
             class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
           >
@@ -23,7 +21,7 @@
               class="bg-white border-b dark:bg-gray-900 dark:border-gray-700"
               v-if="index >= (x - 1) * 5 && index < x * 5"
             >
-              <td class="px-6 py-4">
+              <td class="md:px-6 md:py-4">
                 <img
                   :src="dataRoom[i.idproduct - 1].Img_Url"
                   class="w-14 h-14 object-cover rounded-lg"
@@ -54,28 +52,28 @@
             </tr>
           </tbody>
         </table>
-        <div
-          class="px-5 py-4 bg-white dark:border-gray-900 dark:bg-gray-700 border-t flex flex-col xs:flex-row items-center xs:justify-between"
-        >
-          <div class="inline-flex mt-2 xs:mt-0">
-            <button
-              @click="x == 1 ? (x = 1) : x--"
-              class="text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-            >
-              Prev
-            </button>
-            <div
-              class="text-white bg-gradient-to-r from-pink-500 to-pink-700 hover:bg-gradient-to-br focus:ring-4 focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-            >
-              {{ x }}
-            </div>
-            <button
-              class="text-white bg-gradient-to-r from-pink-500 to-purple-500 hover:bg-gradient-to-l focus:ring-4 focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-              @click="dataUser.length / 5 - 1 < x - 1 ? x : x++"
-            >
-              Next
-            </button>
+      </div>
+      <div
+        class="px-5 py-4 md:bg-white bg-slate-50 flex flex-col xs:flex-row items-center xs:justify-between"
+      >
+        <div class="inline-flex mt-2 xs:mt-0">
+          <button
+            @click="x == 1 ? (x = 1) : x--"
+            class="text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+          >
+            Prev
+          </button>
+          <div
+            class="text-white bg-gradient-to-r from-pink-500 to-pink-700 hover:bg-gradient-to-br focus:ring-4 focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+          >
+            {{ x }}
           </div>
+          <button
+            class="text-white bg-gradient-to-r from-pink-500 to-purple-500 hover:bg-gradient-to-l focus:ring-4 focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+            @click="dataUser.length / 5 - 1 < x - 1 ? x : x++"
+          >
+            Next
+          </button>
         </div>
       </div>
     </div>
@@ -161,7 +159,7 @@ export default {
         return dateA - dateB;
       });
 
-      // console.log(data);
+   
       if (docSnap.exists()) {
         this.dataUser = docSnap.data().Product;
         this.dataUser2 = docSnap.data().Product;
@@ -185,7 +183,7 @@ export default {
         });
       } else {
         // doc.data() will be undefined in this case
-        console.log("No such document!");
+        
       }
     },
     getDate(d) {
@@ -330,10 +328,10 @@ export default {
       }
       for (let index = 0; index < this.dataUser2.length; index++) {
         if (this.dataUser2[index].Day == this.dataUser[this.iofClick].Day) {
-          console.log(this.dataUser2[index].Time.length > 1);
+          
           if (this.dataUser2[index].Time.length > 1) {
             for (let j = 0; j < this.dataUser2[index].Time.length; j++) {
-              console.log(this.dataUser2[index].Time);
+              
               if (
                 this.dataUser2[index].Time[j] ==
                 this.dataUser[this.iofClick].Time[0]
@@ -341,7 +339,7 @@ export default {
                 this.dataUser2[index].Time.splice(j, 1);
                 break;
               }
-              console.log(this.dataUser2[index].Time);
+              
             }
           } else {
             this.dataUser2.splice(index, 1);
@@ -376,7 +374,7 @@ export default {
       this.dataUser = newSchedules;
     },
     returnDate(i) {
-      // console.log(i);
+      
       const date = new Date(i.Day); // current date and time
       const options = {
         weekday: "long", // full day name (e.g. "วันเสาร์")
@@ -393,7 +391,7 @@ export default {
     },
     readDataCount() {
       const unsub = onSnapshot(doc(db, "Admin", "TotleBooking"), (doc) => {
-        console.log("Current data: ", doc.data());
+       
         this.countBooking = doc.data().TotleBooking;
       });
     },

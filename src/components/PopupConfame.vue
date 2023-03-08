@@ -20,27 +20,29 @@
                 role="main"
                 class="text-3xl lg:text-4xl font-semibold leading-7 lg:leading-9 text-center text-gray-800"
               >
-                คุณตั้งการจองจริงๆใช่ไหม
+                ยืนยันการจองห้อง
               </h1>
             </div>
             <div class="mt">
               <p
-                class="mt-6 sm:w-80 text-base leading-7 text-center text-gray-800"
+                class="mt-6 sm:w-80 font-semibold leading-7 text-center text-purple-600"
               >
-                {{ datezaza }}
+                รายละเอียดการจอง <br />
+                {{ datezaza }}<br />
+                เวลา {{ timezaza }}
               </p>
             </div>
             <button
               @click="$emit('confirm', Math.random())"
               class="w-full sm:w-auto mt-14 text-lg leading-4 text-center text-white py-6 px-16 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 bg-gray-800 hover:bg-black"
             >
-              แน่นอน
+              ยืนยัน
             </button>
             <a
               href="javascript:void(0)"
               @click="$emit('add', Math.random())"
               class="mt-6 text-base leading-none focus:outline-none hover:border-gray-800 focus:border-gray-800 border-b border-transparent text-center text-gray-800"
-              >ไม่ละ ฉันเปลี่ยนใจละ</a
+              >ยกเลิก</a
             >
             <button
               @click="$emit('add', Math.random())"
@@ -78,7 +80,7 @@
 </template>
 <script>
 export default {
-  props: ["datezaza"],
+  props: ["datezaza", "timezaza"],
 };
 </script>
 <style></style>

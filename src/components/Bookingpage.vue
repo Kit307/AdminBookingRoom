@@ -1,6 +1,6 @@
 <template>
   <div v-if="dateinput">
-    <div class="h-screen flex justify-center items-center bg-slate-200">
+    <div class="h-screen flex justify-center items-center bg-slate-50">
       <div
         class="w-96 h-60 bg-white flex justify-center items-center rounded-3xl shadow-2xl"
       >
@@ -46,11 +46,13 @@
           เลือกวันใหม่
         </button>
       </div>
-      <div class="grid grid-cols-4 gap-y-10 px-16">
+      <div
+        class="grid xl:grid-cols-4 md:grid-cols-2 gap-y-10 md:gap-x-10 lg:px-16 px-5"
+      >
         <div v-for="item in aaa">
           <div
             v-if="item.Details.show"
-            class="max-w-sm bg-white border shadow-2xl border-gray-200 rounded-lg pb-10 dark:bg-gray-800 dark:border-gray-700 relative"
+            class="max-w-sm bg-white border shadow-2xl border-gray-200 rounded-lg pb-10 dark:bg-gray-800 dark:border-gray-700 relative hover:-translate-y-5 transition ease-in-out duration-300 delay-75 hover:scale-110" 
           >
             <a href="#">
               <img
@@ -239,14 +241,14 @@ export default {
     getstartdate() {
       const date = new Date();
       const yyyyMMdd = date.toISOString().slice(0, 10);
-      // console.log(yyyyMMdd); // prints "2023-03-06"
+
       const now = new Date();
       const year = now.getFullYear();
       const month = now.getMonth() + 1;
       const day = now.getDate();
       this.time = year + "/" + month + "/" + day;
       this.timestart = date.toISOString().slice(0, 10);
-      const maxDate = new Date(year, month - 1, day + 10);
+      const maxDate = new Date(year, month - 1, day + 8);
 
       this.maxDate = maxDate.toISOString().slice(0, 10);
     },

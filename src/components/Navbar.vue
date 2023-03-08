@@ -114,7 +114,7 @@
         >
           <div class="flex items-center justify-between">
             <a href="#" class="-m-1.5 p-1.5">
-              <span class="sr-only">Your Company</span>
+              <span class="sr-only">asdsds</span>
               <img
                 class="h-8"
                 src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
@@ -161,15 +161,18 @@
                 >
 
                 <a
+                  v-show="profiledata.Admin && !login"
                   href="#"
                   class="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-400/10"
-                  >Marketplace</a
+                  @click="$router.replace('/Admin'), (navbar = !navbar)"
+                  >Admin</a
                 >
 
                 <a
                   href="#"
                   class="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-400/10"
-                  >Beg</a
+                  @click="$router.replace('/History'), (navbar = !navbar)"
+                  >History</a
                 >
               </div>
               <div
@@ -235,7 +238,7 @@ export default {
           // console.log(uid);
           this.uid = uid;
           this.login = false;
-          console.log();
+         
           this.readData();
           // ...แสดงผล user, email, id ในจอ
         } else {
@@ -252,7 +255,7 @@ export default {
           // Sign-outsuccessful.
           //   this.$router.push("/");
           this.$router.replace("/login");
-          // console.log("dsaasd");
+        
           this.logoutvar = false;
         })
         .catch((error) => {
@@ -263,7 +266,7 @@ export default {
     readData() {
       const user = auth.currentUser;
       onSnapshot(doc(db, "Profile", user.uid), (doc) => {
-        // console.log(doc.data());
+        
         this.profiledata = doc.data();
       });
     },

@@ -159,7 +159,7 @@ export default {
           // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
           this.progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log("Upload is " + this.progress + "% done");
+          // console.log("Upload is " + this.progress + "% done");
           switch (snapshot.state) {
             case "paused":
               console.log("Upload is paused");
@@ -176,8 +176,6 @@ export default {
           // Handle successful uploads on complete
           // For instance, get the download URL: https://firebasestorage.googleapis.com/...
           getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-            console.log("File available at", downloadURL);
-
             this.upload1(downloadURL);
           });
         }
@@ -257,9 +255,6 @@ export default {
                 d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate(),
             },
           }
-        );
-        console.log(
-          d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate()
         );
       }
       this.$router.replace("/admin/Detel");

@@ -13,7 +13,7 @@
             {{ returnDate() }}
           </div>
         </div>
-        <div class="grid grid-cols-3 gap-14">
+        <div class="grid md:grid-cols-3 gap-14">
           <div class="">
             <div class="bg-white px-10 py-5 rounded-xl shadow-xl font-black">
               <div class="text-xl">จำนวนคนที่จองทั้งหมด</div>
@@ -22,14 +22,7 @@
               </div>
             </div>
           </div>
-          <div class="">
-            <div class="bg-white px-10 py-5 rounded-xl shadow-xl font-black">
-              <div class="text-xl">จำนวนแอดมิน</div>
-              <div class="text-2xl text-center py-10 text-emerald-900">
-                {{ TotleAdmin }}
-              </div>
-            </div>
-          </div>
+
           <div class="">
             <div class="bg-white px-10 py-5 rounded-xl shadow-xl font-black">
               <div class="text-xl">จำนวนผู้ใช้ทั้งหมด</div>
@@ -43,6 +36,16 @@
               <div class="text-xl">จำนวนห้องทั้งหมด</div>
               <div class="text-2xl text-center py-10 text-emerald-900">
                 {{ TotleRoom }}
+              </div>
+            </div>
+          </div>
+          <div class="">
+            <div
+              class="bg-white px-10 py-5 h-full rounded-xl shadow-xl font-black"
+            >
+              <div class="text-xl">จำนวนแอดมิน</div>
+              <div class="text-2xl text-center py-10 text-emerald-900">
+                {{ TotleAdmin }}
               </div>
             </div>
           </div>

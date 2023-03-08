@@ -2,8 +2,8 @@
   <Slidebar />
   <!-- {{ readDataCount() }} -->
   <div class="h-screen bg-slate-50 flex justify-center items-center">
-    <div class="">
-      <div class="relative overflow-x-auto shadow-2xl sm:rounded-lg">
+    <div class="overflow-x-auto">
+      <div class="relative md:shadow-2xl sm:rounded-lg">
         <table
           class="w-full text-sm text-left text-gray-500 dark:text-gray-400"
         >
@@ -26,7 +26,7 @@
               class="bg-white border-b dark:bg-gray-900 dark:border-gray-700"
               v-if="index >= (x - 1) * 5 && index < x * 5 && item.show"
             >
-              <td class="px-6 py-4">
+              <td class="md:px-6 md:py-4">
                 <img
                   :src="item.Img_Url"
                   class="w-14 h-14 object-cover rounded-lg"
@@ -84,7 +84,7 @@
           </tbody>
         </table>
         <div
-          class="px-5 py-4 bg-white dark:border-gray-900 dark:bg-gray-700 border-t flex flex-col xs:flex-row items-center xs:justify-between"
+          class="px-5 py-4 md:bg-white dark:border-gray-900 dark:bg-gray-700 border-t flex flex-col xs:flex-row items-center xs:justify-between"
         >
           <div class="inline-flex mt-2 xs:mt-0">
             <button
@@ -565,7 +565,7 @@ export default {
         (snapshot) => {
           this.progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log("Upload is " + this.progress + "% done");
+          // console.log("Upload is " + this.progress + "% done");
           switch (snapshot.state) {
             case "paused":
               console.log("Upload is paused");
@@ -580,7 +580,6 @@ export default {
         },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-            console.log("File available at", downloadURL);
             this.upload1(downloadURL);
           });
         }

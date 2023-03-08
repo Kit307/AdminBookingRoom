@@ -86,7 +86,7 @@ export default {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          // console.log(user);
+        
           this.xx = user;
           // loginผ่าน แล้วให้เปลี่ยนไปหน้า about
           this.errorlogin = false;

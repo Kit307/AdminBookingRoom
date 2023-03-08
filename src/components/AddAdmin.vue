@@ -2,13 +2,12 @@
   <Slidebar></Slidebar>
 
   <div class="w-full bg-gray-100 pl-0 lg:pl-64 min-h-screen">
-    <p @click="logasd()">{{ TotleAdmin }}</p>
     <div
       class="relative min-h-screen flex items-center justify-center bg-gray-200 dark:bg-gray-700 py-12 px-4 sm:px-6 lg:px-8"
     >
       <!-- bg-yellow-100 -->
       <!-- <div class="absolute bg-black opacity-60 inset-0 z-0"></div> -->
-      <div class="mt-2 items-center z-10">
+      <div class="mt-2 items-center">
         <form @submit.prevent="Allmember()">
           <div
             class="md:py-8 py-14 bg-white max-w-sm px-10 mx-auto rounded-xl shadow-xl dark:bg-gray-800 dark:rounded-xl dark:shadow-xl overflow-hidden space-y-10"
@@ -227,9 +226,6 @@ export default {
       if (!x) {
         this.emailnofile = true;
       }
-    },
-    logasd() {
-      console.log(this.member[this.index].data.Admin);
     },
     readTotleAdmin() {
       const unsub = onSnapshot(doc(db, "Admin", "TotleAdmin"), (doc) => {
