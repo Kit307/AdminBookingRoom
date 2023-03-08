@@ -1,4 +1,5 @@
 <template>
+  {{ dataUser }}
   <div class="h-screen bg-slate-50 flex justify-center items-center">
     <div class="md:overflow-x-hidden overflow-x-scroll">
       <div class="md: shadow-2xl sm:rounded-lg">
@@ -39,7 +40,7 @@
                 {{ dataRoom[i.idproduct - 1].Location }}
               </td>
 
-              <td class="px-6 py-4">{{ getTime(i.Time[0]) }}</td>
+              <td class="px-6 py-4">{{ i.Time[0] }}</td>
 
               <td class="px-6 py-4">
                 <a
@@ -188,23 +189,7 @@ export default {
       // Create a string with the desired date format
       return `${day}/${month}/${year}`;
     },
-    getTime(i) {
-      console.log("getTime");
 
-      switch (i) {
-        case 1:
-          return "9:00 - 12:00";
-          break;
-        case 2:
-          return "12:00 - 15:00";
-          break;
-        case 3:
-          return "15:00 - 18:00";
-          break;
-        default:
-          break;
-      }
-    },
     async cancelBooking() {
       console.log("cancelBooking");
 
@@ -366,7 +351,20 @@ export default {
     },
     returnDate(i) {
       console.log("returnDate");
-
+      let x = "";
+      switch (i.Time[0]) {
+        case 1:
+          x = "9:00 - 12:00";
+          break;
+        case 2:
+          x = "12:00 - 15:00";
+          break;
+        case 3:
+          x = "15:00 - 18:00";
+          break;
+        default:
+          break;
+      }
       const date = new Date(i.Day); // current date and time
       const options = {
         weekday: "long", // full day name (e.g. "วันเสาร์")
@@ -378,7 +376,7 @@ export default {
       };
 
       const thaiDate = date.toLocaleDateString("th-TH", options);
-      this.datetext = `${thaiDate} เวลา ${this.getTime(i.Time[0])}`;
+      this.datetext = `${thaiDate} เวลา ${x}`;
       return thaiDate;
     },
     readDataCount() {
